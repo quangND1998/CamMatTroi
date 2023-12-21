@@ -1,0 +1,67 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.cammattroi">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+      android:name=".MainApplication"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
+      android:allowBackup="false"
+      android:theme="@style/AppTheme"
+      tools:replace="android:theme">
+      <activity
+        android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+        android:launchMode="singleTask"
+        android:windowSoftInputMode="adjustResize">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+
+      <activity
+            android:name="vn.payoo.paymentsdk.ui.home.PayooPaymentSDKActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/protocol_scheme" />
+            </intent-filter>
+      </activity>
+    </application>
+
+     <!-- If your application allows payment with APP_TO_APP method -->
+    <!-- And your targetApi is greater than or equal 30 -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data
+                android:host="qrpayment"
+                android:scheme="payoo" />
+            <!--android:scheme="payoostaging" for Sandbox App-->
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data
+                android:host="go.zalopay.vn"
+                android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="smartpay" />
+            <!--android:scheme="smartpaysb" for Sandbox App-->
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="airpay" />
+        </intent>
+    </queries>
+</manifest>
