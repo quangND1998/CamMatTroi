@@ -33,7 +33,7 @@ const Login = ({ navigation }) => {
     const submitHandler = () => {
         console.log(state)
         dispatch(loginAction(
-            state.email, state.password,
+            state.code, state.password,
             () => {
                 toast.show({
                     title: "Login successfully",

@@ -1,10 +1,9 @@
 import { API_URL } from "@env"
 import axios from "axios";
-import { getToken } from "./asynStorage";
+import { getToken, destroyToken } from "./asynStorage";
 axios.defaults.headers[
     "Accept"
 ] = `application/json`;
-
 axios.interceptors.request.use(async(request) => {
 
     const access_token = await getToken();
@@ -24,6 +23,27 @@ axios.interceptors.request.use(async(request) => {
 
     return request;
 });
+
+axios.interceptors.response.use((response) => {
+    console.log(response)
+    if (response.status == 200) {
+
+    }
+    return response
+}, error => {
+
+    // return Promise.reject(error)
+    if (error.response) {
+
+        if (error.response.status == 401) {
+            destroyToken();
+        }
+
+        return Promise.reject(error)
+    } else {
+        return Promise.reject(error)
+    }
+})
 const ApiService = {
     async setHeader() {
 

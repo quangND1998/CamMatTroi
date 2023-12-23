@@ -1,13 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getToken } from '../common/asynStorage';
 const LoginContext = createContext();
-
+import { loadStorageToken } from '../store/actions/auth';
+import { useDispatch, useSelector } from 'react-redux'
 const LoginProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const dispatch = useDispatch();
     useEffect(() => {
         fetchUser();
+
     }, []);
     const fetchUser = async () => {
+        dispatch(loadStorageToken)
         const token = await getToken();
         if (token !== null) {
             console.log('fetchUser', token);

@@ -6,6 +6,15 @@ const initialState = {
 };
 const loginReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'GET_USER_TOKEN':
+            console.log('GET_USER_TOKEN', action.payload.user);
+            return {
+                ...state,
+                user: action.payload.user,
+                isLoggedIn: true,
+                token: action.payload.token,
+                isLoading: true
+            }
         case 'LOGIN':
             return {
                 ...state

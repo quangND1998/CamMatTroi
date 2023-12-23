@@ -8,10 +8,10 @@
 
 import React from 'react';
 import {
-    View,
-    TouchableOpacity,
-    Text,
-    TextInput,
+  View,
+  TouchableOpacity,
+  Text,
+  TextInput,
 } from 'react-native';
 import Payoo from './payoo'
 import LoginProvider from './context/LoginProvider';
@@ -20,14 +20,16 @@ import { NativeBaseProvider, Box, Center, useToast } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 export default function App() {
-
+  return (
     <LoginProvider>
-    <NativeBaseProvider>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <MainNavigator />
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </NativeBaseProvider>
-  </LoginProvider>
+      <NativeBaseProvider>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <MainNavigator />
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </NativeBaseProvider>
+    </LoginProvider>
+  );
+
 };

@@ -1,10 +1,27 @@
 import { AuthService } from '../../common/auth/authService';
-import { setToken, destroyToken } from '../../common/asynStorage';
+import { setToken, destroyToken, setUser, getToken, getUser } from '../../common/asynStorage';
 
-export const loginAction = (phone_number, password, onSuccess = () => {}, onError = () => {}) => (dispatch) => {
+export const loginAction = (code, password, onSuccess = () => {}, onError = () => {}) => (dispatch) => {
+    return AuthService.login({ code, password }).then(response => {
+        console.log(response.data)
+        setToken(response.data.data.token);
+        setUser(response.data.data.user)
+        dispatch({
+            type: 'LOGIN_SUCCESS',
+            payload: { user: response.data.data.user, token: response.data.data.token },
+        });
+        dispatch({
+            type: 'GET_USER_SUCCESS',
+            payload: { user: response.data.data.user }
+        })
 
-    return AuthService.login({ phone_number, password }).then(res => {
-        console.log(res)
+        onSuccess();
+    }).catch(error => {
+        console.log('aaaaaaaaaa', error.response.data)
+        dispatch({
+            type: 'LOGIN_FAIL',
+        });
+        onError()
     });
 };
 
@@ -37,3 +54,14 @@ export const logoutAction = (token, onSuccess = () => {}, onError = () => {}) =>
         }
     );
 };
+
+export const loadStorageToken = async(dispatch) => {
+    const access_token = await getToken();
+
+    const user = await getUser();
+
+    dispatch({
+        type: 'GET_USER_TOKEN',
+        payload: { user: user, token: access_token },
+    });
+}

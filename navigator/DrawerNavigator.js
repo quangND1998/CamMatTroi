@@ -5,21 +5,23 @@ import {
     DrawerContentScrollView,
     DrawerItemList,
 } from '@react-navigation/drawer';
+import { Avatar } from "native-base";
 import HomeScreen from '../components/Home/Home';
 import { useLogin } from '../context/LoginProvider';
 import { useDispatch, useSelector } from 'react-redux';
-import {loginAction, logoutAction} from '../store/actions/auth';
-
+import { loginAction, logoutAction } from '../store/actions/auth';
+import { useToast } from 'native-base';
+import { getToken } from '../common/asynStorage';
 const Drawer = createDrawerNavigator();
 
 const CustomDrawer = props => {
     const { setIsLoggedIn, profile } = useLogin();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
+    const user = useSelector(state => state.auth.user);
     const login = useSelector(state => state.login);
     const toast = useToast();
 
-    // console.log('user CustomDrawer', user.user)
+    console.log('user CustomDrawer', user)
     const handlerLogout = async () => {
         const token = await getToken();
         // console.log(token)
@@ -62,18 +64,18 @@ const CustomDrawer = props => {
                     }}
                 >
 
-                  
+
                     <View>
                         {/* <Text>{profile.fullname}</Text>
                         <Text>{profile.email}</Text> */}
                     </View>
 
-                    {user.user? <Avatar size="48px" source={{
-                        uri: user.user.avatar,
-                    }} />
-                    : null }
-                        
-                   
+                    {/* <Avatar size="48px" source={{
+                        uri: user.profile_photo_url
+                    }} /> */}
+
+
+
                 </View>
                 <DrawerItemList {...props} />
             </DrawerContentScrollView>
@@ -115,7 +117,7 @@ const DrawerNavigator = () => {
             drawerContent={props => <CustomDrawer {...props} />}
         >
             <Drawer.Screen component={HomeScreen} name='Home' />
-         
+
         </Drawer.Navigator>
     );
 };
