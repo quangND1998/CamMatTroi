@@ -14,7 +14,9 @@ const HomeScreen = ({ navigation, route }) => {
     const langEnglish = 1;
     const cashAmount = 50000;
 
-    _callPayment = () => {
+
+
+    const _callPayment = () => {
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");

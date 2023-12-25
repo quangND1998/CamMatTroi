@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../components/Login/Login';
 import { useLogin } from '../context/LoginProvider';
 import DrawerNavigator from './DrawerNavigator';
+import BottomNavigator from './BottomNavigator';
 const Stack = createNativeStackNavigator();
 const StackNavigator = () => {
     return (
@@ -17,6 +18,6 @@ const StackNavigator = () => {
 
 const MainNavigator = () => {
     const { isLoggedIn } = useLogin();
-    return isLoggedIn ? <DrawerNavigator /> : <StackNavigator />;
+    return isLoggedIn ? <BottomNavigator /> : <StackNavigator />;
 };
 export default MainNavigator;

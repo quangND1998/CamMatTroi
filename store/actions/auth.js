@@ -25,8 +25,8 @@ export const loginAction = (code, password, onSuccess = () => {}, onError = () =
     });
 };
 
-export const logoutAction = (token, onSuccess = () => {}, onError = () => {}) => (dispatch) => {
-    return AuthService.logout({ token }).then(
+export const logoutAction = (onSuccess = () => {}, onError = () => {}) => (dispatch) => {
+    return AuthService.logout().then(
         (response) => {
             dispatch({
                 type: 'LOGOUT'
