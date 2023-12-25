@@ -6,7 +6,7 @@ buildscript {
         buildToolsVersion = "30.0.2"
         minSdkVersion = 21
         compileSdkVersion = 31
-        targetSdkVersion = 32
+        targetSdkVersion = 31
         ndkVersion = "21.4.7075529"
     }
     repositories {
@@ -44,4 +44,15 @@ allprojects {
             dirs 'libs'
         }
     }
+}
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion 31
+                buildToolsVersion "30.0.2"
+            }
+        }
+    }
+    
 }
