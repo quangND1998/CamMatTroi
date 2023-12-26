@@ -197,7 +197,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation(name: 'payoo-payment-sdk-release-3.0.0-RC15-20220313001935', ext: 'aar') { transitive = true }
+    implementation(name: 'payoo-payment-sdk-release-3.0.0-RC29', ext: 'aar') { transitive = true }
     implementation(name: 'payoo-sdk-core-release-1.0.4-RC1', ext: 'aar') { transitive = true }
     implementation ('androidx.appcompat:appcompat:1.2.0-beta01'){
         version {

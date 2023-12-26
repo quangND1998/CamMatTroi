@@ -11,7 +11,8 @@ import {
   View,
   TouchableOpacity,
   Text,
-  TextInput,
+  StyleSheet,
+  TextInput, KeyboardAvoidingView
 } from 'react-native';
 import Payoo from './payoo'
 import LoginProvider from './context/LoginProvider';
@@ -19,6 +20,8 @@ import MainNavigator from './navigator/MainNavigator';
 import { NativeBaseProvider, Box, Center, useToast } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
+
 export default function App() {
   return (
     <LoginProvider>
@@ -26,6 +29,7 @@ export default function App() {
         <SafeAreaProvider>
           <NavigationContainer>
             <MainNavigator />
+            <Toast />
           </NavigationContainer>
         </SafeAreaProvider>
       </NativeBaseProvider>
@@ -33,3 +37,18 @@ export default function App() {
   );
 
 };
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: '100%',
+  },
+  container: {
+    flex: 1,
+    padding: 20,
+    width: '100%',
+    maxWidth: 340,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
